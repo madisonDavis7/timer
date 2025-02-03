@@ -1,0 +1,110 @@
+:root {
+    --color-platinum: #EEE2DF;
+    --color-thistle: #DEC1DB;
+    --color-liberty: #5B61B2;
+    --color-bleu-de-france: #2F80E4;
+    --color-little-boy-blue: #6DA0E1;
+    --color-hover: #ad74a7;
+}
+
+body {
+    background-color: var(--color-little-boy-blue);
+    margin: 0;
+}
+
+.timer-cont {
+    background-color: var(--color-thistle);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15vh;
+    margin: 50vh auto 0;
+    transform: translateY(-50%);
+    width: 25vw;
+}
+
+.timer input {
+    width: 4rem;
+    height: 3rem;
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    text-align: center;
+
+}
+
+.timer input::-webkit-inner-spin-button,
+.timer input::-webkit-outer-spin-button {
+    -webkit-apppearance: none;
+    margin: 0;
+}
+
+.timer span {
+    font-size: 3rem;
+    font-weight: 400;
+}
+
+.timer-btns {
+    display: flex;
+    gap: .5rem;
+    margin-top: .5rem;
+}
+
+.timer-btns button {
+    padding: 0.25rem 1rem;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background: var(--color-liberty);
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.timer-btns button:hover {
+    color: var(--color-hover);
+    transform: translateY(-5px);
+    border: 1px solid var(--color-hover);
+}
+
+
+/*icons */
+
+.controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: calc(50vh + 5rem);
+}
+
+.icon {
+    background-color: var(--color-thistle);
+    border-radius: 50%;
+    height: 4rem;
+    width: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: .25rem;
+    margin: .25rem;
+    transition: transform .2s ease;
+    border: 1px solid transparent;
+}
+
+
+.icon:hover {
+    color: var(--color-hover);
+    cursor: pointer;
+    transform: translateY(-5px);
+    border: 1px solid var(--color-hover);
+}
+
+
+i {
+    font-size: 2.5rem;
+
+}
