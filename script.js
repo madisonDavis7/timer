@@ -1,10 +1,20 @@
+const hoursInput = document.getElementById('hours');
 const minutesInput = document.getElementById('minutes');
 const secondsInput = document.getElementById('seconds');
 const startButton = document.getElementById('start');
+const pauseButton = document.getElementById('pause');
 const resetButton = document.getElementById('reset');
+
+//themes
+const cloudBtn = document.querySelector('.cloud-opt');
+const rainBtn = document.querySelector('.rain-opt');
+const pinkBtn = document.querySelector('.pink-opt');
+const greenBtn = document.querySelector('.green-opt');
+const nightBtn = document.querySelector('.night-opt');
 
 let timerInterval;
 let isRunning = false;
+
 
 function padNumber(number) {
     return number.toString().padStart(2, '0');
@@ -28,24 +38,19 @@ function validateInput(input) {
 }
 
 function startTimer() {
-    if (isRunning) {
-        clearInterval(timerInterval);
-        startButton.textContent = 'Start';
-        isRunning = false;
-        minutesInput.disabled = false;
-        secondsInput.disabled = false;
-        return;
-    }
+    if (isRunning) return;
 
+    let hours = parseInt(hours.Input.value) || 0;
     let minutes = parseInt(minutesInput.value) || 0;
     let seconds = parseInt(secondsInput.value) || 0;
     let totalSeconds = (minutes * 60) + seconds;
 
     if (totalSeconds <= 0) return;
 
-    startButton.textContent = 'Pause';
     isRunning = true;
-
+    startButton.disabled = true;
+    pauseButton.disabled = false;
+    hoursInput.disabled = true;
     minutesInput.disabled = true;
     secondsInput.disabled = true;
 
@@ -54,12 +59,15 @@ function startTimer() {
 
         if (totalSeconds < 0) {
             clearInterval(timerInterval);
-            startButton.textContent = 'Start';
             isRunning = false;
+            startButton.disabled = false;
+            pauseButton.disabled = true;
             minutesInput.disabled = false;
             secondsInput.disabled = false;
+            hoursInput.disabled = false;
             minutesInput.value = '00';
             secondsInput.value = '00';
+            hoursInput.value = '00';
             alert('Time is up!');
             return;
         }
@@ -67,17 +75,28 @@ function startTimer() {
         const displayMinutes = Math.floor(totalSeconds / 60);
         const displaySeconds = totalSeconds % 60;
 
+        hoursInput.value = padNumber(displayHours);
         minutesInput.value = padNumber(displayMinutes);
         secondsInput.value = padNumber(displaySeconds);
     }, 1000);
 }
 
+function pauseTimer() {
+    clearInterval(timerInterval);
+    isRunning = false;
+    startButton.disabled = false;
+    pauseButton.disabled = true;
+}
+
 function resetTimer() {
     clearInterval(timerInterval);
+    hoursInput.value = '00';
     minutesInput.value = '00';
     secondsInput.value = '00';
-    startButton.textContent = 'Start';
     isRunning = false;
+    startButton.disabled = false;
+    pauseButton.disabled = true;
+    hoursInput.disabled = false;
     minutesInput.disabled = false;
     secondsInput.disabled = false;
 }
@@ -86,6 +105,7 @@ function resetTimer() {
 minutesInput.addEventListener('input', (e) => validateInput(e.target));
 secondsInput.addEventListener('input', (e) => validateInput(e.target));
 startButton.addEventListener('click', startTimer);
+pauseButton.addEventListener('click', pauseTimer);
 resetButton.addEventListener('click', resetTimer);
 
 // Handle click to select all text
@@ -112,3 +132,70 @@ secondsInput.addEventListener('paste', (e) => {
     secondsInput.value = numericOnly;
     validateInput(secondsInput);
 });
+
+//section for themes/ backdrops based on button chosen
+function removeAllThemes() {
+    document.body.classList.remove(
+        'cloud-theme',
+        'rain-theme',
+        'pink-theme',
+        'green-theme',
+        'night-theme'
+    );
+    // Hide stars when changing themes
+    document.querySelector('.star-container').style.display = 'none';
+}
+//when clciked apply theme
+cloudBtn.addEventListener('click', () => {
+    removeAllThemes();
+    document.body.classList.add('cloud-theme');
+});
+
+rainBtn.addEventListener('click', () => {
+    removeAllThemes();
+    document.body.classList.add('rain-theme');
+});
+
+pinkBtn.addEventListener('click', () => {
+    removeAllThemes();
+    document.body.classList.add('pink-theme');
+});
+
+greenBtn.addEventListener('click', () => {
+    removeAllThemes();
+    document.body.classList.add('green-theme');
+});
+
+nightBtn.addEventListener('click', () => {
+    removeAllThemes();
+    document.body.classList.add('night-theme');
+    // Show stars only for night theme
+    document.querySelector('.star-container').style.display = 'block';
+});
+
+// Modify the createStar function to add stars to a container div instead of body
+function createStars() {
+    // Create a container for stars
+    const starContainer = document.createElement('div');
+    starContainer.className = 'star-container';
+    document.body.appendChild(starContainer);
+
+    for (let i = 0; i < 1000; i++) {
+        const star = document.createElement("div");
+        star.className = "star";
+        star.style.width = "4px";
+        star.style.height = "4px";
+        star.style.top = Math.random() * 100 + "%";
+        star.style.left = Math.random() * 100 + "%";
+
+        const duration = .5 + Math.random() * 8;
+        const delay = Math.random() * 4;
+        star.style.animationDuration = `${duration}s`;
+        star.style.animationDelay = `-${delay}s`;
+
+        starContainer.appendChild(star);
+    }
+}
+
+// Create stars once when page loads but hide them initially
+createStars();

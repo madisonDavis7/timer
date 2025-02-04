@@ -10,10 +10,16 @@
 body {
     background-color: var(--color-little-boy-blue);
     margin: 0;
+    transition: all .5s ease;
 }
 
 .timer-cont {
-    background-color: var(--color-thistle);
+    background: rgba(222, 193, 219, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,6 +27,8 @@ body {
     margin: 50vh auto 0;
     transform: translateY(-50%);
     width: 25vw;
+    position: relative;
+    z-index: 2;
 }
 
 .timer input {
@@ -30,13 +38,15 @@ body {
     border: none;
     font-size: 2rem;
     text-align: center;
-
+    color: white;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .timer input::-webkit-inner-spin-button,
 .timer input::-webkit-outer-spin-button {
-    -webkit-apppearance: none;
+    -webkit-appearance: none;
     margin: 0;
+    border: white;
 }
 
 .timer span {
@@ -48,6 +58,7 @@ body {
     display: flex;
     gap: .5rem;
     margin-top: .5rem;
+    justify-content: center;
 }
 
 .timer-btns button {
@@ -61,11 +72,30 @@ body {
 }
 
 .timer-btns button:hover {
-    color: var(--color-hover);
+    border-color: var(--color-hover);
     transform: translateY(-5px);
     border: 1px solid var(--color-hover);
 }
 
+.cloud-theme .timer-btns button {
+    background: #9277b4;
+}
+
+.rain-theme .timer-btns button {
+    background: lightblue;
+}
+
+.pink-theme .timer-btns button {
+    background: #131927;
+}
+
+.green-theme .timer-btns button {
+    background: #066547;
+}
+
+.night-theme .timer-btns button {
+    background: #39343a;
+}
 
 /*icons */
 
@@ -78,10 +108,15 @@ body {
     left: 50%;
     transform: translateX(-50%);
     top: calc(50vh + 5rem);
+    z-index: 2;
 }
 
 .icon {
-    background-color: var(--color-thistle);
+    background: rgba(222, 193, 219, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     border-radius: 50%;
     height: 4rem;
     width: 4rem;
@@ -92,19 +127,94 @@ body {
     padding: .25rem;
     margin: .25rem;
     transition: transform .2s ease;
-    border: 1px solid transparent;
 }
-
 
 .icon:hover {
     color: var(--color-hover);
     cursor: pointer;
     transform: translateY(-5px);
-    border: 1px solid var(--color-hover);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: rgba(222, 193, 219, 0.3);
 }
-
 
 i {
     font-size: 2.5rem;
+}
 
+.cloud-theme .icon:hover {
+    color: #9277b4;
+}
+
+.rain-theme .icon:hover {
+    color: lightblue;
+}
+
+.pink-theme .icon:hover {
+    color: gray;
+}
+
+.green-theme .icon:hover {
+    color: #066547;
+}
+
+.night-theme .icon:hover {
+    color: #7b6481;
+}
+
+/*themed backgrounds*/
+
+.cloud-theme {
+    background-image: url(./images/clouds.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.rain-theme {
+    background-color: rgb(112, 112, 222);
+}
+
+.pink-theme {
+    background-image: url(./images/img.webp);
+    background-size: cover;
+    background-position: center;
+}
+
+.green-theme {
+    background: linear-gradient(to right, #052a0c, #426407, #076447);
+}
+
+.star-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: none;
+    z-index: 1;
+}
+
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 8s infinite;
+}
+
+@keyframes twinkle {
+    0% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.3;
+    }
+}
+
+.night-theme {
+    background-color: black;
 }

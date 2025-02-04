@@ -19,12 +19,14 @@
 <body>
     <div class="timer-cont">
         <div class="timer">
+            <input type="number" id="hours" min="0" max="23" value="00">
+            <span>:</span>
             <input type="number" id="minutes" min="0" max="59" value="00">
             <span>:</span>
             <input type="number" id="seconds" min="0" max="59" value="00">
             <div class="timer-btns">
-
                 <button id="start">Start</button>
+                <button id="pause">Pause</button>
                 <button id="reset">Reset</button>
             </div>
         </div>
@@ -39,8 +41,11 @@
         <div class="icon pink-opt">
             <i class="fas fa-rainbow"></i>
         </div>
-        <div class="icon pink-opt">
+        <div class="icon green-opt">
             <i class="fas fa-frog"></i>
+        </div>
+        <div class="icon night-opt">
+            <i class="fas fa-moon"></i>
         </div>
     </div>
     <script src="script.js"></script>
