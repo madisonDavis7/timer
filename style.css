@@ -196,7 +196,8 @@ i {
 
 .star {
     position: absolute;
-    background: white;
+    background: #f4ecd3;
+    opacity: 100%;
     border-radius: 50%;
     animation: twinkle 8s infinite;
 }

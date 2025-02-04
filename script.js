@@ -40,10 +40,10 @@ function validateInput(input) {
 function startTimer() {
     if (isRunning) return;
 
-    let hours = parseInt(hours.Input.value) || 0;
+    let hours = parseInt(hoursInput.value) || 0;
     let minutes = parseInt(minutesInput.value) || 0;
     let seconds = parseInt(secondsInput.value) || 0;
-    let totalSeconds = (minutes * 60) + seconds;
+    let totalSeconds = (hours * 3600) + (minutes * 60) + seconds;
 
     if (totalSeconds <= 0) return;
 
@@ -72,8 +72,10 @@ function startTimer() {
             return;
         }
 
-        const displayMinutes = Math.floor(totalSeconds / 60);
-        const displaySeconds = totalSeconds % 60;
+        const displayHours = Math.floor(totalSeconds / 3600);
+        const remainingSeconds = totalSeconds % 3600;
+        const displayMinutes = Math.floor(remainingSeconds / 60);
+        const displaySeconds = remainingSeconds % 60;
 
         hoursInput.value = padNumber(displayHours);
         minutesInput.value = padNumber(displayMinutes);
@@ -183,8 +185,8 @@ function createStars() {
     for (let i = 0; i < 1000; i++) {
         const star = document.createElement("div");
         star.className = "star";
-        star.style.width = "4px";
-        star.style.height = "4px";
+        star.style.width = "5px";
+        star.style.height = "5px";
         star.style.top = Math.random() * 100 + "%";
         star.style.left = Math.random() * 100 + "%";
 
