@@ -144,8 +144,10 @@ function removeAllThemes() {
         'green-theme',
         'night-theme'
     );
-    // Hide stars when changing themes
-    document.querySelector('.star-container').style.display = 'none';
+    // Only hide stars if we're not switching TO night theme
+    if (!document.body.classList.contains('night-theme')) {
+        document.querySelector('.star-container').style.display = 'none';
+    }
 }
 //when clciked apply theme
 cloudBtn.addEventListener('click', () => {
@@ -171,8 +173,12 @@ greenBtn.addEventListener('click', () => {
 nightBtn.addEventListener('click', () => {
     removeAllThemes();
     document.body.classList.add('night-theme');
-    // Show stars only for night theme
-    document.querySelector('.star-container').style.display = 'block';
+    const starContainer = document.querySelector('.star-container');
+    if (starContainer) {
+        starContainer.style.display = 'block';
+        console.log('Star container displayed'); // Debug log
+    }
+    createShootingStar(); // Create one immediately
 });
 
 // Modify the createStar function to add stars to a container div instead of body
@@ -201,3 +207,38 @@ function createStars() {
 
 // Create stars once when page loads but hide them initially
 createStars();
+
+function createShootingStar() {
+    console.log('Creating shooting star'); // Debug log
+    const star = document.createElement('div');
+    star.className = 'shooting-star';
+
+    // Make the star more visible for testing
+    star.style.top = '10%';
+    star.style.right = '10%';
+
+    const starContainer = document.querySelector('.star-container');
+    if (!starContainer) {
+        console.error('Star container not found!');
+        return;
+    }
+
+    starContainer.appendChild(star);
+    console.log('Shooting star added to container'); // Debug log
+
+    setTimeout(() => {
+        star.remove();
+        console.log('Shooting star removed'); // Debug log
+    }, 3000);
+}
+
+function startShootingStars() {
+    // Create shooting stars more frequently for testing
+    setInterval(() => {
+        if (document.body.classList.contains('night-theme')) {
+            createShootingStar();
+        }
+    }, 5000); // Every 5 seconds for testing
+}
+
+startShootingStars();
