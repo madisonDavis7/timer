@@ -209,13 +209,15 @@ function createStars() {
 createStars();
 
 function createShootingStar() {
-    console.log('Creating shooting star'); // Debug log
     const star = document.createElement('div');
     star.className = 'shooting-star';
 
-    // Make the star more visible for testing
-    star.style.top = '10%';
-    star.style.right = '10%';
+    // Random starting position
+    const randomTop = Math.random() * 100; // Top 30% of screen
+    const randomRight = Math.random() * 100; // Right 20% of screen
+
+    star.style.top = `${randomTop}%`;
+    star.style.right = `${randomRight}%`;
 
     const starContainer = document.querySelector('.star-container');
     if (!starContainer) {
@@ -224,21 +226,29 @@ function createShootingStar() {
     }
 
     starContainer.appendChild(star);
-    console.log('Shooting star added to container'); // Debug log
 
+    // Remove the star after animation completes
     setTimeout(() => {
         star.remove();
-        console.log('Shooting star removed'); // Debug log
     }, 3000);
 }
 
+function createShootingStars() {
+    // Generate random number between 1 and 4
+    const numberOfStars = Math.floor(Math.random() * 4) + 1;
+
+    // Create multiple stars
+    for (let i = 0; i < numberOfStars; i++) {
+        createShootingStar();
+    }
+}
+
 function startShootingStars() {
-    // Create shooting stars more frequently for testing
     setInterval(() => {
         if (document.body.classList.contains('night-theme')) {
-            createShootingStar();
+            createShootingStars();  // Create multiple stars instead of just one
         }
-    }, 5000); // Every 5 seconds for testing
+    }, 5000); // Every 5 seconds
 }
 
 startShootingStars();

@@ -206,14 +206,22 @@ i {
     position: absolute;
     width: 12px;
     height: 12px;
-    background: red;
+    background: white;
     border-radius: 50%;
-    filter: drop-shadow(0 0 6px #910beb);
-    animation: shoot 3s ease-in-out;
-    opacity: 0;
-    filter: drop-shadow(0 0 6px #910beb);
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1));
     animation: shoot 6s ease-in-out infinite;
     z-index: 1;
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        height: 4px;
+        background: linear-gradient(to right, rgba(255, 255, 255, 1), transparent);
+        transform: translateX(-100%) rotate(45deg);
+    }
 }
 
 @keyframes shoot {
