@@ -97,9 +97,32 @@ body {
     background: #39343a;
 }
 
-/* actual buttno color for each theme */
+/* actual button color for each theme */
 .glitter-theme .timer-btns button {
-    background: pink;
+    background: black;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    display: none;
+
+}
+
+#glitter-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    display: none;
 }
 
 /*icons */
@@ -198,7 +221,7 @@ i {
 }
 
 .glitter-theme .icon:hover {
-    color: purple;
+    color: white;
 }
 
 /*themed backgrounds*/

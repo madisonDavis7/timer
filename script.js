@@ -146,6 +146,13 @@ function removeAllThemes() {
         'night-theme',
         'glitter-theme'
     );
+
+    // Hide the PIXI canvas when switching themes
+    const pixiCanvas = document.querySelector('canvas');
+    if (pixiCanvas) {
+        pixiCanvas.style.display = 'none';
+    }
+
     // Only hide stars if we're not switching TO night theme
     if (!document.body.classList.contains('night-theme')) {
         document.querySelector('.star-container').style.display = 'none';
@@ -174,6 +181,18 @@ greenBtn.addEventListener('click', () => {
 glitterBtn.addEventListener('click', () => {
     removeAllThemes();
     document.body.classList.add('glitter-theme');
+
+    // Show the PIXI canvas
+    const pixiCanvas = document.querySelector('canvas');
+    if (pixiCanvas) {
+        pixiCanvas.style.position = 'fixed';
+        pixiCanvas.style.top = '0';
+        pixiCanvas.style.left = '0';
+        pixiCanvas.style.width = '100%';
+        pixiCanvas.style.height = '100%';
+        pixiCanvas.style.zIndex = '0';
+        pixiCanvas.style.display = 'block';
+    }
 });
 
 nightBtn.addEventListener('click', () => {
