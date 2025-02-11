@@ -252,3 +252,39 @@ function startShootingStars() {
 }
 
 startShootingStars();
+
+document.addEventListener('DOMContentLoaded', () => {
+    const iconContainer = document.querySelector('.icons-container');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const icons = document.querySelectorAll('.icon');
+    const iconWidth = 4.5; // 4rem icon width + 0.5rem gap
+    let currentPosition = 0;
+
+    // Initially hide all icons after the first 5
+    icons.forEach((icon, index) => {
+        if (index >= 5) {
+            icon.style.display = 'none';
+        }
+    });
+
+    nextBtn.addEventListener('click', () => {
+        if (currentPosition < icons.length - 5) {
+            // Hide the leftmost visible icon
+            icons[currentPosition].style.display = 'none';
+            // Show the next icon on the right
+            icons[currentPosition + 5].style.display = 'flex';
+            currentPosition++;
+        }
+    });
+
+    prevBtn.addEventListener('click', () => {
+        if (currentPosition > 0) {
+            // Show the previous hidden icon on the left
+            icons[currentPosition - 1].style.display = 'flex';
+            // Hide the rightmost visible icon
+            icons[currentPosition + 4].style.display = 'none';
+            currentPosition--;
+        }
+    });
+});
