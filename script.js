@@ -11,6 +11,7 @@ const rainBtn = document.querySelector('.rain-opt');
 const pinkBtn = document.querySelector('.pink-opt');
 const greenBtn = document.querySelector('.green-opt');
 const nightBtn = document.querySelector('.night-opt');
+const glitterBtn = document.querySelector('.glitter-opt');
 
 let timerInterval;
 let isRunning = false;
@@ -142,7 +143,8 @@ function removeAllThemes() {
         'rain-theme',
         'pink-theme',
         'green-theme',
-        'night-theme'
+        'night-theme',
+        'glitter-theme'
     );
     // Only hide stars if we're not switching TO night theme
     if (!document.body.classList.contains('night-theme')) {
@@ -168,6 +170,10 @@ pinkBtn.addEventListener('click', () => {
 greenBtn.addEventListener('click', () => {
     removeAllThemes();
     document.body.classList.add('green-theme');
+});
+glitterBtn.addEventListener('click', () => {
+    removeAllThemes();
+    document.body.classList.add('glitter-theme');
 });
 
 nightBtn.addEventListener('click', () => {

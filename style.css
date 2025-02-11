@@ -97,6 +97,11 @@ body {
     background: #39343a;
 }
 
+/* actual buttno color for each theme */
+.glitter-theme .timer-btns button {
+    background: pink;
+}
+
 /*icons */
 
 .controls {
@@ -192,6 +197,10 @@ i {
     color: #7b6481;
 }
 
+.glitter-theme .icon:hover {
+    color: purple;
+}
+
 /*themed backgrounds*/
 
 .cloud-theme {
@@ -212,6 +221,10 @@ i {
 
 .green-theme {
     background: linear-gradient(to right, #052a0c, #426407, #076447);
+}
+
+.glitter-theme {
+    background: black;
 }
 
 .star-container {
