@@ -232,8 +232,9 @@ i {
     background-position: center;
 }
 
-.rain-theme {
-    background-color: rgb(112, 112, 222);
+.rain {
+    background: linear-gradient(#081b27, #243f5a, #2b4269, #435472);
+
 }
 
 .pink-theme {
@@ -328,4 +329,69 @@ i {
 
 .night-theme {
     background-color: black;
+}
+
+/* rain effect */
+/* Rain effect container */
+.rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+/* Individual raindrop style */
+/* Individual raindrop style */
+.drop {
+    background: linear-gradient(0deg, #435472, #132230);
+    width: 1px;
+    height: 89px;
+    position: absolute;
+    opacity: 0.5;
+    /* Slight transparency for a more realistic effect */
+    animation: fall linear infinite;
+}
+
+/* Container for rain */
+.rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+/* The animation for falling raindrops */
+@keyframes fall {
+    0% {
+        transform: translateY(-100px);
+        /* Start above the screen */
+    }
+
+    100% {
+        transform: translateY(100vh);
+        /* End below the screen */
+    }
+}
+
+/* Randomizing each drop's speed and start position */
+.drop:nth-child(odd) {
+    animation-duration: 1.5s;
+    /* Shorter duration for some drops */
+    animation-delay: 0s;
+    /* No delay */
+}
+
+.drop:nth-child(even) {
+    animation-duration: 2.5s;
+    /* Longer duration for other drops */
+    animation-delay: 0.5s;
+    /* Slight delay to stagger */
 }

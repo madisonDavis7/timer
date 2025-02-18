@@ -8,6 +8,7 @@ const resetButton = document.getElementById('reset');
 //themes
 const cloudBtn = document.querySelector('.cloud-opt');
 const rainBtn = document.querySelector('.rain-opt');
+const nbDrop = 858;
 const pinkBtn = document.querySelector('.pink-opt');
 const greenBtn = document.querySelector('.green-opt');
 const nightBtn = document.querySelector('.night-opt');
@@ -312,4 +313,84 @@ document.addEventListener('DOMContentLoaded', () => {
             currentPosition--;
         }
     });
+});
+
+//rain drop effect
+function randRange(minNum, maxNum) {
+    return Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;
+}
+function createRain() {
+    let rainDiv = document.querySelector('.rain');
+    if (!rainDiv) {
+        rainDiv = document.createElement('div');
+        rainDiv.classList.add('rain');
+        document.body.appendChild(rainDiv);
+    }
+
+    rainDiv.innerHTML = ''; // Clears previous rain before making new
+
+    // Create random raindrops
+    for (let i = 0; i < nbDrop; i++) {
+        const dropLeft = randRange(0, window.innerWidth); // Random left position
+        const dropTop = randRange(-1000, window.innerHeight); // Random top position
+
+        const drop = document.createElement('div');
+        drop.classList.add('drop');
+        drop.style.left = `${dropLeft}px`;
+        drop.style.top = `${dropTop}px`;
+
+        rainDiv.appendChild(drop);
+    }
+}
+
+function removeAllThemes() {
+    // Remove all possible themes
+    document.body.classList.remove(
+        'cloud-theme',
+        'rain-theme',
+        'pink-theme',
+        'green-theme',
+        'night-theme',
+        'glitter-theme'
+    );
+
+    // Hide the PIXI canvas when switching themes (if it exists)
+    const pixiCanvas = document.querySelector('canvas');
+    if (pixiCanvas) {
+        pixiCanvas.style.display = 'none';
+    }
+
+    // Only hide stars if we're not switching TO night theme
+    if (!document.body.classList.contains('night-theme')) {
+        const starContainer = document.querySelector('.star-container');
+        if (starContainer) {
+            starContainer.style.display = 'none';
+        }
+    }
+
+    // Hide rain effect unless we are switching to rain theme
+    const rainDiv = document.querySelector('.rain');
+    if (rainDiv && !document.body.classList.contains('rain-theme')) {
+        rainDiv.style.display = 'none'; // Hide rain when switching themes
+    }
+}
+
+
+rainBtn.addEventListener('click', () => {
+    // Ensure other themes are removed
+    removeAllThemes();
+
+    // Apply the rain theme
+    document.body.classList.add('rain-theme');
+    createRain();  // Create the rain effect
+
+    // Show the rain div
+    const rainDiv = document.querySelector('.rain');
+    if (rainDiv) {
+        rainDiv.style.display = 'block';  // Display the rain effect
+    }
+
+    // Make sure the other theme icons are visible
+    const themeIcons = document.querySelectorAll('.icon');
+    themeIcons.forEach(icon => icon.style.display = 'flex');
 });
