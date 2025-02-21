@@ -1,5 +1,5 @@
 
-a cute study timer app I am creating
+a cute study timer app I am creating - work in progress
 
 ----------------------------------------
 javascript
