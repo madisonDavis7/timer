@@ -156,6 +156,7 @@ canvas {
     padding: .25rem;
     margin: .25rem;
     transition: transform .2s ease;
+    color: white;
 }
 
 .icons-container {
@@ -188,6 +189,7 @@ canvas {
     align-items: center;
     cursor: pointer;
     transition: transform .2s ease;
+    color: white;
 }
 
 .arrow-btn:hover {
