@@ -231,21 +231,75 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    nextBtn.addEventListener('click', () => {
-        if (currentPosition < icons.length - 5) {
-            icons[currentPosition].style.display = 'none';
-            icons[currentPosition + 5].style.display = 'flex';
-            currentPosition++;
+    function getVisibleIconCount() {
+        const container = document.querySelector('.icons-container');
+        const icon = container.querySelector('.icon');
+        if (!icon) return 1;
+        const iconStyle = window.getComputedStyle(icon);
+        const iconWidth = icon.offsetWidth +
+            parseFloat(iconStyle.marginLeft) +
+            parseFloat(iconStyle.marginRight);
+        const containerWidth = container.offsetWidth;
+        return Math.floor(containerWidth / iconWidth);
+    }
+
+    function updateIconsContainerWidth() {
+        const container = document.querySelector('.icons-container');
+        const icons = container.querySelectorAll('.icon');
+        if (!icons.length) return;
+        // Temporarily show the first icon to measure it
+        icons[0].style.display = 'flex';
+        // Force reflow
+        void icons[0].offsetWidth;
+        const iconStyle = window.getComputedStyle(icons[0]);
+        const iconWidth = icons[0].offsetWidth +
+            parseFloat(iconStyle.marginLeft) +
+            parseFloat(iconStyle.marginRight);
+        const screenWidth = window.innerWidth;
+        let iconsPerRow = 5;
+        if (screenWidth < 600) {
+            iconsPerRow = 2;
+        } else if (screenWidth < 900) {
+            iconsPerRow = 4;
+        }
+        container.style.width = (iconWidth * iconsPerRow) + "px";
+    }
+
+    function updateVisibleIcons(startIndex = 0) {
+        const icons = document.querySelectorAll('.icons-container .icon');
+        const visibleCount = getVisibleIconCount();
+        icons.forEach((icon, i) => {
+            icon.style.display = (i >= startIndex && i < startIndex + visibleCount) ? 'flex' : 'none';
+        });
+        // Store current index if needed for arrow navigation
+        window.currentIconIndex = startIndex;
+    }
+
+    // Arrow button event listeners:
+    document.querySelector('.next-btn').addEventListener('click', () => {
+        const icons = document.querySelectorAll('.icons-container .icon');
+        const visibleCount = getVisibleIconCount();
+        let startIndex = window.currentIconIndex || 0;
+        if (startIndex + visibleCount < icons.length) {
+            updateVisibleIcons(startIndex + 1);
+        }
+    });
+    document.querySelector('.prev-btn').addEventListener('click', () => {
+        let startIndex = window.currentIconIndex || 0;
+        if (startIndex > 0) {
+            updateVisibleIcons(startIndex - 1);
         }
     });
 
-    prevBtn.addEventListener('click', () => {
-        if (currentPosition > 0) {
-            icons[currentPosition - 1].style.display = 'flex';
-            icons[currentPosition + 4].style.display = 'none';
-            currentPosition--;
-        }
+    // On window resize, update visible icons:
+    window.addEventListener('resize', () => {
+        updateIconsContainerWidth();
+        updateVisibleIcons(window.currentIconIndex || 0);
     });
+
+    // On page load:
+    updateIconsContainerWidth();
+    updateVisibleIcons(0);
 
     // STAR EFFECTS
     function createStars() {

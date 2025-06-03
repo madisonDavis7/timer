@@ -21,60 +21,113 @@ body {
     box-shadow: 0 8px 32px 2px rgba(31, 38, 135, 0.5);
     border-radius: 10px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 15vh;
+    width: 28vw;
+    max-width: 400px;
+    min-width: 220px;
+
     margin: 50vh auto 0;
     transform: translateY(-50%);
-    width: 25vw;
     position: relative;
+    overflow: hidden;
     z-index: 1;
+    padding: 2vw 1vw;
+    transition: width 0.3s, height 0.3s;
+}
+
+
+
+.timer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
 }
 
 .timer input {
-    width: 4rem;
+    width: 18vw;
+    max-width: 4rem;
+    min-width: 2.5rem;
     height: 3rem;
-    background: transparent;
-    border: none;
     font-size: 2rem;
+    box-sizing: border-box;
     text-align: center;
-    color: white;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-.timer input::-webkit-inner-spin-button,
-.timer input::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-    border: white;
 }
 
 .timer span {
-    font-size: 3rem;
-    font-weight: 400;
+    font-size: 2.5vw;
+    margin: 0 0.5vw;
 }
 
 .timer-btns {
     display: flex;
+    flex-direction: row;
     gap: .5rem;
-    margin-top: .5rem;
     justify-content: center;
+    width: 100%;
+    margin-top: 0;
 }
 
 .timer-btns button {
-    padding: 0.25rem 1rem;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    background: var(--color-liberty);
-    color: white;
+    background: rgba(222, 193, 219, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 4px 20px 2px rgba(31, 38, 135, 0.5);
+    border-radius: 10px;
+    height: 2rem;
+    width: 6rem;
+    font-size: 1.2rem;
+    color: var(--color-platinum);
     cursor: pointer;
-    transition: transform 0.2s ease;
+    transition: all .2s ease;
 }
 
-.timer-btns button:hover {
-    border-color: var(--color-hover);
-    transform: translateY(-5px);
-    border: 1px solid var(--color-hover);
+/* Responsive for small screens */
+@media (max-width: 900px) {
+    .icons-container {
+        width: 14vw;
+        /* Show 4 icons */
+    }
+}
+
+@media (max-width: 600px) {
+    .timer-cont {
+        width: 96vw;
+        min-width: 0;
+        max-width: 98vw;
+        aspect-ratio: unset;
+        padding: 1rem 0.5rem;
+    }
+
+    .timer input {
+        width: 22vw;
+        max-width: 3rem;
+        font-size: 1.2rem;
+    }
+
+    .timer span {
+        font-size: 1.5rem;
+    }
+
+    .timer-btns button {
+        font-size: 1rem;
+        padding: 0.25rem 0.5rem;
+        min-width: 40px;
+    }
+
+    .icons-container {
+        width: 9vw;
+        /* Show 2-3 icons */
+    }
+
+    .icon {
+        flex: 0 0 4.5vw;
+    }
 }
 
 .cloud-theme .timer-btns button {
@@ -145,11 +198,11 @@ canvas {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 0 4px 20px 2px rgba(31, 38, 135, 0.5);
     border-radius: 50%;
     height: 4rem;
     width: 4rem;
     display: flex;
+    flex: 0 0 3.6vw;
     justify-content: center;
     align-items: center;
     cursor: pointer;
@@ -157,36 +210,36 @@ canvas {
     margin: .25rem;
     transition: transform .2s ease;
     color: white;
+    aspect-ratio: 1/1;
+    /* Always a perfect circle */
+
+}
+
+.icon-slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    /* Optional: set a max-width if you want */
 }
 
 .icons-container {
     display: flex;
-    gap: 0.5rem;
-    width: auto;
-    overflow: visible;
-    padding-top: 5px;
-}
-
-.icon:hover {
-    color: #5961b5;
-    cursor: pointer;
-    transform: translateY(-5px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    background: rgba(222, 193, 219, 0.3);
+    overflow: hidden;
+    transition: width 0.3s;
+    /* width is set dynamically by JS */
 }
 
 .arrow-btn {
     background: rgba(222, 193, 219, 0.2);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     border-radius: 50%;
-    height: 4rem;
-    width: 4rem;
+    border: none;
+    width: 2.5rem;
+    height: 2.5rem;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    margin: 0 0.5rem;
     cursor: pointer;
     transition: transform .2s ease;
     color: white;
